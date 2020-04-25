@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from chat import views
+from . import views
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+router.register(r'players', views.PlayersViewSet)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/chat/', include('chat.urls')),
-    path('api/battleship/', include('game.urls')),
+    path('', include(router.urls))
 ]
